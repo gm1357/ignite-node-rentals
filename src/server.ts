@@ -1,13 +1,11 @@
 import express from "express";
 
+import { categoriesRoutes } from "./routes/categories.routes";
+
 const app = express();
 
-app.get("/", (req, res) => res.send({ message: "Hello World!" }));
+app.use(express.json());
 
-app.post("/", (req, res) => {
-    const { name } = req.body;
-
-    return res.send({ name });
-});
+app.use("/categories", categoriesRoutes);
 
 app.listen(3333);
