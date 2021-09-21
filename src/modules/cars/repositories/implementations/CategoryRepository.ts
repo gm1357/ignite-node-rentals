@@ -1,11 +1,23 @@
-import { Category } from "../models/category";
-import { ICreateCategoryDTO } from "./ICategoryRepository";
+import { Category } from "../../models/category";
+import {
+    ICategoryRepository,
+    ICreateCategoryDTO,
+} from "../ICategoryRepository";
 
-class CategoryRepository {
+class CategoryRepository implements ICategoryRepository {
     private categories: Category[];
 
-    constructor() {
+    private static INSTANCE: CategoryRepository;
+
+    private constructor() {
         this.categories = [];
+    }
+
+    static getInstance(): CategoryRepository {
+        if (!this.INSTANCE) {
+            this.INSTANCE = new CategoryRepository();
+        }
+        return this.INSTANCE;
     }
 
     create({ name, description }: ICreateCategoryDTO): void {
