@@ -27,7 +27,10 @@ class ImportCategoriesUseCase {
                 });
             });
 
-            parse.on("end", () => resolve(importedCategories));
+            parse.on("end", () => {
+                fs.promises.unlink(file.path);
+                resolve(importedCategories);
+            });
 
             parse.on("error", (err) => reject(err));
         });
