@@ -1,6 +1,7 @@
 import { createConnection, getConnectionOptions } from "typeorm";
 
 import { Category } from "../modules/cars/entities/category";
+import { Specification } from "../modules/cars/entities/specification";
 
 interface IOptions {
     host: string;
@@ -11,6 +12,6 @@ getConnectionOptions().then((options) => {
     newOptions.host = "database_ignite";
     createConnection({
         ...options,
-        entities: [Category],
+        entities: [Category, Specification],
     });
 });
