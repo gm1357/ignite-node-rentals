@@ -1,4 +1,4 @@
-import { Specification } from "../../models/specification";
+import { Specification } from "../../entities/specification";
 import {
     ICreateSpecificationDTO,
     ISpecificationRepository,
@@ -17,16 +17,19 @@ class SpecificationRepository implements ISpecificationRepository {
         if (!this.INSTANCE) {
             this.INSTANCE = new SpecificationRepository();
         }
+
         return this.INSTANCE;
     }
 
     create({ name, description }: ICreateSpecificationDTO): void {
         const specification = new Specification();
+
         Object.assign(specification, {
             name,
             description,
             created_at: new Date(),
         });
+
         this.specifications.push(specification);
     }
 
@@ -34,6 +37,7 @@ class SpecificationRepository implements ISpecificationRepository {
         const specification = this.specifications.find(
             (specification) => specification.name === name
         );
+
         return specification;
     }
 }

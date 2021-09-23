@@ -2,6 +2,7 @@ import { ISpecificationRepository } from "../../repositories/ISpecificationRepos
 
 interface IRequest {
     name: string;
+
     description: string;
 }
 
