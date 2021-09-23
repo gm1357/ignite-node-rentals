@@ -1,5 +1,6 @@
 import { createConnection, getConnectionOptions } from "typeorm";
 
+import { User } from "../modules/accounts/entities/user";
 import { Category } from "../modules/cars/entities/category";
 import { Specification } from "../modules/cars/entities/specification";
 
@@ -12,6 +13,6 @@ getConnectionOptions().then((options) => {
     newOptions.host = "database_ignite";
     createConnection({
         ...options,
-        entities: [Category, Specification],
+        entities: [Category, Specification, User],
     });
 });
