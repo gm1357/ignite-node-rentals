@@ -10,16 +10,12 @@ class AuthenticateUserController {
             AuthenticateUserUseCase
         );
 
-        try {
-            const response = await authenticateUserUseCase.execute({
-                email,
-                password,
-            });
+        const response = await authenticateUserUseCase.execute({
+            email,
+            password,
+        });
 
-            return res.send(response);
-        } catch (err: any) {
-            return res.status(400).send({ error: err.message });
-        }
+        return res.send(response);
     }
 }
 
