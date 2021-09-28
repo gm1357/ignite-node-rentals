@@ -3,13 +3,13 @@ import { inject, injectable } from "tsyringe";
 
 import { AppError } from "../../../../errors/AppError";
 import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
-import { UserRepository } from "../../repositories/implementations/UserRepository";
+import { IUserRepository } from "../../repositories/IUserRepository";
 
 @injectable()
 class CreateUserUseCase {
     constructor(
         @inject("UserRepository")
-        private userRepository: UserRepository
+        private userRepository: IUserRepository
     ) {}
 
     async execute(createUserDTO: ICreateUserDTO): Promise<void> {
