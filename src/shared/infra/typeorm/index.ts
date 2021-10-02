@@ -1,18 +1,17 @@
-import { createConnection, getConnectionOptions } from "typeorm";
+import { Connection, createConnection, getConnectionOptions } from "typeorm";
 
 import { User } from "@modules/accounts/infra/typeorm/entities/user";
+import { Car } from "@modules/cars/infra/typeorm/entities/car";
 import { Category } from "@modules/cars/infra/typeorm/entities/category";
 import { Specification } from "@modules/cars/infra/typeorm/entities/specification";
 
-interface IOptions {
-    host: string;
-}
+export default async (host = "database_ignite"): Promise<Connection> => {
+    const defaultOptions = await getConnectionOptions();
 
-getConnectionOptions().then((options) => {
-    const newOptions = options as IOptions;
-    newOptions.host = "database_ignite";
-    createConnection({
-        ...options,
-        entities: [Category, Specification, User],
-    });
-});
+    return createConnection(
+        Object.assign(defaultOptions, {
+            host,
+            entities: [Category, Specification, User, Car],
+        })
+    );
+};
