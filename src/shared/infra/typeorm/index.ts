@@ -12,8 +12,12 @@ export default async (host = "database_ignite"): Promise<Connection> => {
 
     return createConnection(
         Object.assign(defaultOptions, {
-            host,
+            host: process.env.NODE_ENV === "test" ? "localhost" : host,
             entities: [Category, Specification, User, Car, CarImage, Rental],
+            database:
+                process.env.NODE_ENV === "test"
+                    ? "noderentals_test"
+                    : defaultOptions.database,
         })
     );
 };
