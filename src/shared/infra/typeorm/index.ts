@@ -1,6 +1,7 @@
 import { Connection, createConnection, getConnectionOptions } from "typeorm";
 
 import { User } from "@modules/accounts/infra/typeorm/entities/user";
+import { UserTokens } from "@modules/accounts/infra/typeorm/entities/userTokens";
 import { Car } from "@modules/cars/infra/typeorm/entities/car";
 import { CarImage } from "@modules/cars/infra/typeorm/entities/carImage";
 import { Category } from "@modules/cars/infra/typeorm/entities/category";
@@ -13,7 +14,15 @@ export default async (host = "database_ignite"): Promise<Connection> => {
     return createConnection(
         Object.assign(defaultOptions, {
             host: process.env.NODE_ENV === "test" ? "localhost" : host,
-            entities: [Category, Specification, User, Car, CarImage, Rental],
+            entities: [
+                Category,
+                Specification,
+                User,
+                Car,
+                CarImage,
+                Rental,
+                UserTokens,
+            ],
             database:
                 process.env.NODE_ENV === "test"
                     ? "noderentals_test"
