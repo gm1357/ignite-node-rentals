@@ -1,5 +1,7 @@
 import { container } from "tsyringe";
 
+import "@shared/container/providers";
+
 import { UserRepository } from "@modules/accounts/infra/typeorm/repositories/UserRepository";
 import { UsersTokensRepository } from "@modules/accounts/infra/typeorm/repositories/UsersTokensRepository";
 import { IUserRepository } from "@modules/accounts/repositories/IUserRepository";
@@ -14,9 +16,6 @@ import { ICategoryRepository } from "@modules/cars/repositories/ICategoryReposit
 import { ISpecificationRepository } from "@modules/cars/repositories/ISpecificationRepository";
 import { RentalsRepository } from "@modules/rentals/infra/typeorm/repositories/RentalsRepository";
 import { IRentalsRepository } from "@modules/rentals/repositories/IRentalsRepository";
-
-import { IDateProvider } from "./providers/DateProvider/IDateProvider";
-import { DayjsDateProvider } from "./providers/DateProvider/implementations/DayjsDateProvider";
 
 container.registerSingleton<ICategoryRepository>(
     "CategoryRepository",
@@ -40,11 +39,6 @@ container.registerSingleton<ICarsImageRepository>(
 container.registerSingleton<IRentalsRepository>(
     "RentalsRepository",
     RentalsRepository
-);
-
-container.registerSingleton<IDateProvider>(
-    "DayjsDateProvider",
-    DayjsDateProvider
 );
 
 container.registerSingleton<IUsersTokensRepository>(
